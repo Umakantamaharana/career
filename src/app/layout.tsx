@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Link from 'next/link';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Career135 | Latest Govt Jobs, Exam Dates, Results & Career Updates',
