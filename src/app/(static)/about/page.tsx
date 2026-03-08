@@ -1,6 +1,11 @@
 import React from 'react';
 
-const AboutPage: React.FC = () => {
+export const metadata = {
+    title: 'About Us | Career135',
+    description: 'Learn more about Career135 and our mission to simplify the job search process.',
+};
+
+export default function AboutPage() {
     return (
         <div className="min-h-screen bg-slate-50 py-12">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,6 +30,4 @@ const AboutPage: React.FC = () => {
             </div>
         </div>
     );
-};
-
-export default AboutPage;
+}

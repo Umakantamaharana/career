@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import { fetchJobs } from '../services/jobService';
@@ -6,7 +8,7 @@ import JobCard from '../components/JobCard';
 import AdBanner from '../components/AdBanner';
 import SocialLinks from '../components/SocialLinks';
 
-const HomePage: React.FC = () => {
+export default function HomePage() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,15 +29,15 @@ const HomePage: React.FC = () => {
 
   const filteredJobs = jobs.filter(job =>
     (job.website_content?.title || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.location?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    job.type?.toLowerCase().includes(searchTerm.toLowerCase())
+    (job.location || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (job.type || "").toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col">
       {/* Hero Section */}
-      <div className="bg-slate-900 text-white py-12 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="bg-slate-900 text-white py-12 sm:py-20 w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-6">
             <span className="text-blue-400">Career135</span>
           </h1>
@@ -43,7 +45,7 @@ const HomePage: React.FC = () => {
             Latest Govt Jobs, Exam Dates, Results & Career Updates in India
           </p>
 
-          <div className="relative max-w-xl mx-auto">
+          <div className="relative w-full max-w-xl mx-auto">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <Search className="h-5 w-5 text-gray-400" />
             </div>
@@ -58,7 +60,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+      <div className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
           {/* Main Content - Job List */}
@@ -113,9 +115,7 @@ const HomePage: React.FC = () => {
           </div>
 
         </div>
-      </main>
+      </div>
     </div>
   );
-};
-
-export default HomePage;
+}

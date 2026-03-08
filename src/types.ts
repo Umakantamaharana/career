@@ -19,6 +19,7 @@ export interface Job {
   };
   status: string;
   href: string;
+  image_url?: string;
   // Computed/Fallback fields for UI compatibility if needed, or we update UI to use website_content
   date?: string;
   location?: string;

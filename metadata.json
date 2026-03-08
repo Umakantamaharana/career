@@ -1,5 +1,0 @@
-{
-  "name": "Daily Job Updates",
-  "description": "A dynamic job board that fetches daily updates from a CSV file, featuring Markdown job descriptions, ad spaces, and social media integration.",
-  "requestFramePermissions": []
-}

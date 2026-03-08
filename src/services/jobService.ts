@@ -1,11 +1,22 @@
-
 import { Job } from '../types';
 
 export const fetchJobs = async (): Promise<Job[]> => {
   try {
-    const response = await fetch('latest_jobs.json'); // Assumes this file is served or available in public/
+    // Next.js static generation doesn't support relative API fetches natively without full URL 
+    // so we will just fetch the public static JSON file directly on the client, or via explicit host on server
+
+    // Determine base URL for server-side fetching
+    const baseURL = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
+
+    // On client, relative path is fine. On server, absolute path is required.
+    const url = typeof window === 'undefined' ? `${baseURL}/latest_jobs.json` : '/latest_jobs.json';
+
+    const response = await fetch(url, { next: { revalidate: 3600 } }); // Cache hits for 1 hour
+
     if (!response.ok) {
-      throw new Error('Failed to fetch JSON file');
+      throw new Error(`Failed to fetch JSON file: ${response.statusText}`);
     }
     const data = await response.json();
 

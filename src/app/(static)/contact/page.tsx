@@ -1,7 +1,12 @@
 import React from 'react';
 import { Mail, MapPin } from 'lucide-react';
 
-const ContactPage: React.FC = () => {
+export const metadata = {
+    title: 'Contact Us | Career135',
+    description: 'Have questions or feedback? Reach out to us directly via email.',
+};
+
+export default function ContactPage() {
     return (
         <div className="min-h-screen bg-slate-50 py-12">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,11 +22,11 @@ const ContactPage: React.FC = () => {
                         <div className="space-y-4">
                             <div className="flex items-center text-gray-700">
                                 <Mail className="mr-3 text-blue-600" size={20} />
-                                <span>support@dailyjobupdates.com</span>
+                                <span>support@career135.com</span>
                             </div>
                             <div className="flex items-center text-gray-700">
                                 <MapPin className="mr-3 text-blue-600" size={20} />
-                                <span>San Francisco, CA</span>
+                                <span>India</span>
                             </div>
                         </div>
                     </div>
@@ -29,7 +34,7 @@ const ContactPage: React.FC = () => {
                     <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
                         <h2 className="text-xl font-semibold mb-4">Support Hours</h2>
                         <p className="text-gray-600">
-                            Our support team is available Monday through Friday, 9:00 AM to 5:00 PM EST.
+                            Our support team is available Monday through Friday, 9:00 AM to 5:00 PM IST.
                         </p>
                         <p className="mt-4 text-sm text-gray-500">
                             We typically respond to inquiries within 24 hours.
@@ -40,5 +45,3 @@ const ContactPage: React.FC = () => {
         </div>
     );
 };
-
-export default ContactPage;
