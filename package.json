@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@octokit/rest": "^22.0.1",
     "@tailwindcss/typography": "^0.5.19",
+    "jose": "^6.2.0",
     "lucide-react": "^0.577.0",
     "next": "16.1.6",
     "papaparse": "^5.5.3",
