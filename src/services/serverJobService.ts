@@ -12,7 +12,11 @@ export const fetchJobsServer = async (): Promise<Job[]> => {
             console.warn("Failed to fetch jobs from backend repository. Returning empty jobs list.");
             return [];
         }
-        const data = await response.json();
+        let data = await response.json();
+
+        // Filter out UNPUBLISHED or incomplete jobs
+        // Assuming status 'GENERATED' means it has the website_content
+        data = data.filter((item: any) => item.status === 'GENERATED');
 
         const jobs: Job[] = data.map((item: any) => ({
             ...item,

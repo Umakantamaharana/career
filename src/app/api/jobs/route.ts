@@ -12,7 +12,11 @@ export async function GET() {
             throw new Error('Failed to fetch from GitHub');
         }
 
-        const data = await response.json();
+        let data = await response.json();
+
+        // Filter out UNPUBLISHED
+        data = data.filter((item: any) => item.status === 'GENERATED');
+
         return NextResponse.json(data);
     } catch (error) {
         console.error('API Error reading jobs:', error);
