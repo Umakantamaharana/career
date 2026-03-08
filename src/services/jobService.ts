@@ -5,20 +5,14 @@ export const fetchJobs = async (): Promise<Job[]> => {
     // Next.js static generation doesn't support relative API fetches natively without full URL 
     // so we will just fetch the public static JSON file directly on the client, or via explicit host on server
 
-    // Determine base URL for server-side fetching
-    const baseURL = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
-
-    // On client, relative path is fine. On server, absolute path is required.
-    const url = typeof window === 'undefined' ? `${baseURL}/latest_jobs.json` : '/latest_jobs.json';
-
-    const response = await fetch(url, { next: { revalidate: 3600 } }); // Cache hits for 1 hour
+    const DATA_URL = 'https://raw.githubusercontent.com/Umakantamaharana/job-scrapper-backend/main/latest_jobs.json';
+    const response = await fetch(DATA_URL, { next: { revalidate: 3600 } }); // Cache hits for 1 hour
 
     if (!response.ok) {
       throw new Error(`Failed to fetch JSON file: ${response.statusText}`);
     }
-    const data = await response.json();
+    let data = await response.json();
+    data = data.filter((item: any) => item.status === 'GENERATED');
 
     // Map raw JSON to Job interface if needed, or purely pass through if structure matches
     const jobs: Job[] = data.map((item: any) => ({
